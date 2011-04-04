@@ -14,7 +14,7 @@ Adds one or more triples to the graph. The interpretation of each argument is as
     if an array then it is interpreted as an array of (p, o, c) all with the same subject s
   
 * o:  if a string value then this is interprered as the object of a triple.
-    if the value parses as a qname or URI then it is treated as a resource unless x has a value
+    if the value parses as a qname or URI then it is treated as a resource unless x has a value of rdfs:Literal
     otherwise it is treated as a literal.
     if an array then it is interpreted as an array of (o,c), i.e. triples with subject s, predicate p
   
