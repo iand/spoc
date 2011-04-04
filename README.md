@@ -32,8 +32,8 @@ Simple literal
     <rdf:Description rdf:about="http://example.com/foo">
        <rdfs:label>Summat</rdfs:label>
     </rdf:Desciption>
-    ---->
-    add("http://example.com/foo", "rdfs:label", "Summat")
+    
+    ----> add("http://example.com/foo", "rdfs:label", "Summat")
 
 To add:
     <rdf:Description rdf:about="http://example.com/foo">
