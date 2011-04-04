@@ -29,6 +29,11 @@ Adds one or more triples to the graph. The interpretation of each argument is as
 remove(s, p, o, c)
 ------------------
 
+find(s, p, o, c)
+------------------
+
+
+
 Default Namespace Bindings
 --------------------------
 The following namespace bindings are always available for use as qnames:
