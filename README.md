@@ -28,28 +28,28 @@ Adds one or more triples to the graph. The interpretation of each argument is as
 
 ### Examples
 
-Simple literal
+Literal object
     <rdf:Description rdf:about="http://example.com/foo">
        <rdfs:label>Summat</rdfs:label>
     </rdf:Desciption>
     
-    ----> add("http://example.com/foo", "rdfs:label", "Summat")
+    --> add("http://example.com/foo", "rdfs:label", "Summat")
 
-To add:
+Resource object
     <rdf:Description rdf:about="http://example.com/foo">
        <rdfs:seeAlso rdf:resource="http://example.com/other" />
     </rdf:Desciption>
-Use:  
-    add("http://example.com/foo", "rdfs:seeAlso", "http://example.com/other")
+    
+    --> add("http://example.com/foo", "rdfs:seeAlso", "http://example.com/other")
 
 
 
-To add:
+Literal object that might be mistaken for a resource
     <rdf:Description rdf:about="http://example.com/foo">
        <rdfs:comment>http://example.com/other</rdfs:comment>
     </rdf:Desciption>
-Use:  
-    add("http://example.com/foo", "rdfs:label", "http://example.com/other", "rdfs:Literal")
+    
+    --> add("http://example.com/foo", "rdfs:label", "http://example.com/other", "rdfs:Literal")
 
 
 
