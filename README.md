@@ -31,7 +31,7 @@ remove(s, p, o, c)
 
 Default Namespace Bindings
 --------------------------
-The following namespace bindings are always available as qnames:
+The following namespace bindings are always available for use as qnames:
 
 <table>
 <tr><th>prefix</th><th>Namespace URI</th></tr>
