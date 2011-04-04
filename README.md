@@ -26,12 +26,41 @@ Adds one or more triples to the graph. The interpretation of each argument is as
     the value of o is a plain literal with this language code
     Otherwise the value is parsed as a Qname or a URI and the value of o is a typed literal with this datatype
 
+### Examples
+
+To add:
+    <rdf:Description rdf:about="http://example.com/foo">
+       <rdfs:label>Summat</rdfs:label>
+    </rdf:Desciption>
+Use:  
+    add("http://example.com/foo", "rdfs:label", "Summat")
+
+To add:
+    <rdf:Description rdf:about="http://example.com/foo">
+       <rdfs:seeAlso rdf:resource="http://example.com/other" />
+    </rdf:Desciption>
+Use:  
+    add("http://example.com/foo", "rdfs:seeAlso", "http://example.com/other")
+
+
+
+To add:
+    <rdf:Description rdf:about="http://example.com/foo">
+       <rdfs:comment>http://example.com/other</rdfs:comment>
+    </rdf:Desciption>
+Use:  
+    add("http://example.com/foo", "rdfs:label", "http://example.com/other", "rdfs:Literal")
+
+
+
 remove(s, p, o, c)
 ------------------
 
-find(s, p, o, c)
-------------------
+find(s, p, o, c, u)
+-------------------
 
+
+* u: boolean, indicates whether results returned should be unique (true) or not (false). Default is false, i.e. non-unique matches
 
 
 Default Namespace Bindings
