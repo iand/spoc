@@ -28,11 +28,11 @@ Adds one or more triples to the graph. The interpretation of each argument is as
 
 ### Examples
 
-To add:
+Simple literal
     <rdf:Description rdf:about="http://example.com/foo">
        <rdfs:label>Summat</rdfs:label>
     </rdf:Desciption>
-Use:  
+    ---->
     add("http://example.com/foo", "rdfs:label", "Summat")
 
 To add:
