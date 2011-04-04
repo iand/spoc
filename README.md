@@ -1,6 +1,10 @@
 
 Spoc API Specification
 ======================
+Noodling around an extremely simple, non-object based API for RDF that could be implemented in many different languages
+
+
+
 
 add(s, p, o, c)
 ---------------
@@ -24,3 +28,19 @@ Adds one or more triples to the graph. The interpretation of each argument is as
 
 remove(s, p, o, c)
 ------------------
+
+Default Namespace Bindings
+--------------------------
+The following namespace bindings are always available as qnames:
+
+<table>
+<tr><th>prefix</th><th>Namespace URI</th></tr>
+<tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
+<tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema#</td></tr>
+<tr><td>owl</td><td>http://www.w3.org/2002/07/owl#</td></tr>
+<tr><td>dc</td><td>http://purl.org/dc/terms/</td></tr>
+<tr><td>foaf</td><td>http://xmlns.com/foaf/0.1/</td></tr>
+<tr><td>geo</td><td>http://www.w3.org/2003/01/geo/wgs84_pos#</td></tr>
+<tr><td>skos</td><td>http://www.w3.org/2004/02/skos/core#</td></tr>
+<tr><td>ov</td><td>http://open.vocab.org/terms/</td></tr>
+</table>
