@@ -17,7 +17,7 @@ Adds one or more triples to the graph. The interpretation of each argument is as
 * p: if a string value then this is interpreted as the property of a triple. It is parsed as a Qname or a URI.
     if an array then it is interpreted as an array of (p, o, c) all with the same subject s
   
-* o:  if a string value then this is interprered as the object of a triple.
+* o:  if a string value then this is interpreted as the object of a triple.
     if the value parses as a qname or URI then it is treated as a resource unless x has a value of rdfs:Literal
     otherwise it is treated as a literal.
     if an array then it is interpreted as an array of (o,c), i.e. triples with subject s, predicate p
@@ -58,6 +58,23 @@ remove(s, p, o, c)
 
 find(s, p, o, c, u)
 -------------------
+
+exists(s, p, o, c)
+---------------
+Tests whether any of the triples exist
+
+clear()
+-------------------
+Remove all triples
+
+count()
+-------------------
+Return the number of triples
+
+empty()
+-------------------
+Return true if there are no triples, false otherwise
+
 
 
 * u: boolean, indicates whether results returned should be unique (true) or not (false). Default is false, i.e. non-unique matches

@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title>spoc.js tests</title>
+    <script type="text/javascript" src="spoc.js"></script>
+  </head>
+  <body>
+    <h1>spoc.js tests</h1>
+    <script type="text/javascript">
+    
+      function equals(actual, expected, message) {
+        var ret = '';
+        if (actual == expected) {
+          ret = 'PASS: ' + message;
+        }
+        else {
+          ret = 'FAIL: ' + message + ' (expected ' + expected + ' but got ' + actual + ')';
+        }
+        
+        
+        return ret;
+      }
+    
+    
+      var g = new SPOC.Graph();
+      g.add('http://example.com/s', 'http://example.com/p', 'http://example.com/o');
+      document.write(equals(g.count(), 1, "Adding a triple") + "<br />");
+
+      g.clear();
+      document.write(equals(g.count(), 0, "Clearing a graph") + "<br />");
+
+      g.add('http://example.com/s', 'http://example.com/p', 'http://example.com/o');
+      g.add('http://example.com/s', 'http://example.com/p', 'http://example.com/o2');
+      document.write(equals(g.count(), 2, "Adding 2 triples with different objects") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'http://example.com/o');
+      g.add('http://example.com/s', 'http://example.com/p2', 'http://example.com/o');
+      document.write(equals(g.count(), 2, "Adding 2 triples with different predicates") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'http://example.com/o');
+      g.add('http://example.com/s2', 'http://example.com/p', 'http://example.com/o');
+      document.write(equals(g.count(), 2, "Adding 2 triples with different subjects") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'http://example.com/o');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', 'http://example.com/o'), true, "Exists finds added triple with uri object") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', '_:o');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', '_:o'), true, "Exists finds added triple with bnode object") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'o');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', 'o'), true, "Exists finds added triple with plain literal object") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'o', 'en');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', 'o', 'en'), true, "Exists finds added triple with language literal object") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'o', 'http://example.com/dt');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', 'o', 'http://example.com/dt'), true, "Exists finds added triple with datatype literal object") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'o', 'http://example.com/dt');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', 'o'), false, "Exists checks existance of datatype on original object") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'o');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', 'o', 'http://example.com/dt'), false, "Exists checks omission of datatype on original object") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'o', 'en');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', 'o'), false, "Exists checks existance of lang on original object") + "<br />");
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'o');
+      document.write(equals(g.exists('http://example.com/s', 'http://example.com/p', 'o', 'en'), false, "Exists checks omission of lang on original object") + "<br />");
+
+      g.clear();
+      g.add([ ['http://example.com/s', 'http://example.com/p', 'http://example.com/o'], ['http://example.com/s', 'http://example.com/p', 'http://example.com/o2'] ]);
+      document.write(equals(g.count(), 2, "Add 2 triples in an array") + "<br />");
+
+      g.clear();
+      g.add( 'http://example.com/s', [ ['http://example.com/p', 'http://example.com/o'], ['http://example.com/p', 'http://example.com/o2'] ]);
+      document.write(equals(g.count(), 2, "Add 2 triples with shared subjects") + "<br />");
+    
+      g.clear();
+      g.add( 'http://example.com/s', 'http://example.com/p', [ [ 'http://example.com/o'], ['http://example.com/o2'] ]);
+      document.write(equals(g.count(), 2, "Add 2 triples with shared predicates") + "<br />");
+
+
+      g.clear();
+      g.add('http://example.com/s', 'http://example.com/p', 'http://example.com/o');
+      g.add('http://example.com/s', 'http://example.com/p', 'http://example.com/o2');
+      g.add('http://example.com/s', 'http://example.com/p2', 'foo');
+      g.add('http://example.com/s', 'http://example.com/p2', 'foo', 'fr');
+      g.add('http://example.com/s2', 'http://example.com/p3', 'bar', 'http://example.com/dt');
+      g.add('http://example.com/s2', 'http://example.com/p4', '_:a');
+      g.add('_:s', 'http://example.com/p', 'http://example.com/o');
+      g.add('_:s', 'http://example.com/p', 'http://example.com/o2');
+      g.add('_:s', 'http://example.com/p2', 'foo');
+      g.add('_:s', 'http://example.com/p2', 'foo', 'fr');
+      g.add('_:s', 'http://example.com/p3', 'bar', 'http://example.com/dt');
+      g.add('_:s', 'http://example.com/p4', '_:a');
+      
+
+      document.write(equals(g.find('http://example.com/s', 'http://example.com/p', 'http://example.com/o').length, 1, "Find exact resources") + "<br />");
+      document.write(equals(g.find('http://example.com/s2', 'http://example.com/p4', '_:a').length, 1, "Find exact resources, blank object") + "<br />");
+      document.write(equals(g.find('http://example.com/s', 'http://example.com/p2', 'foo').length, 1, "Find exact literals") + "<br />");
+      document.write(equals(g.find('http://example.com/s', 'http://example.com/p2', 'foo', 'fr').length, 1, "Find exact language literals") + "<br />");
+      document.write(equals(g.find('http://example.com/s2', 'http://example.com/p3', 'bar', 'http://example.com/dt').length, 1, "Find exact datatype literals") + "<br />");
+      document.write(equals(g.find('http://example.com/s', 'http://example.com/p', 'http://example.com/bogus').length, 0, "Does not find bogus resources") + "<br />");
+      document.write(equals(g.find('_:s', 'http://example.com/p', 'http://example.com/o').length, 1, "Find exact resources, blank subject") + "<br />");
+
+      document.write(equals(g.find('http://example.com/s', 'http://example.com/p', undefined).length, 2, "Find all property values") + "<br />");
+
+    </script>
+  </body>
+</html>
